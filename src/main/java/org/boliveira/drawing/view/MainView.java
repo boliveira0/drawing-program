@@ -21,8 +21,8 @@ public class MainView extends Navigable {
     private static MainView INSTANCE;
     private Boolean active;
     private Navigable currentView;
-    private Orchestrable<Canvas> canvasCommandOrchestrator;
-    private Map<String, Navigable> views;
+    private final Orchestrable<Canvas> canvasCommandOrchestrator;
+    private Map<String, Navigable> viewsMap;
 
     private MainView() {
         this.active = true;
@@ -32,9 +32,9 @@ public class MainView extends Navigable {
     }
 
     private void mapViews() {
-        this.views = new HashMap<>();
-        this.views.put("1", new CreateCanvasView(this.canvasCommandOrchestrator, this));
-        this.views.put("2", new CommandView(this.canvasCommandOrchestrator, this));
+        this.viewsMap = new HashMap<>();
+        this.viewsMap.put("1", new CreateCanvasView(this.canvasCommandOrchestrator, this));
+        this.viewsMap.put("2", new CommandView(this.canvasCommandOrchestrator, this));
     }
 
     public static MainView getDefaultInstance() {
@@ -50,8 +50,8 @@ public class MainView extends Navigable {
             while (this.active) {
                 System.out.print(currentView.menuAsText());
                 var input = reader.readLine();
-                var output = this.currentView.handleInput(input);
-                if (!output.isPresent()) {
+                var output = this.currentView.handleInput(input.trim());
+                if (!output.isEmpty()) {
                     System.out.println(output.get());
                 }
             }
@@ -79,16 +79,14 @@ public class MainView extends Navigable {
 
     @Override
     public Optional<String> handleInput(String input) {
-        switch (input) {
-            case "3":
-                this.quit();
-                break;
-            default:
-                this.currentView = views.get(input.trim());
-        }
-        if (this.currentView == null) {
-            this.currentView = this;
-            return Optional.of("Invalid Option");
+        if (input.equals("3")) {
+            this.quit();
+        } else {
+            this.currentView = this.viewsMap.get(input.trim());
+            if (this.currentView == null) {
+                this.currentView = this;
+                return Optional.of("Invalid Option");
+            }
         }
         return Optional.empty();
     }

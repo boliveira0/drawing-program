@@ -1,9 +1,5 @@
 package org.boliveira.drawing.control;
 
-import org.boliveira.drawing.control.CanvasCommandOrchestrator;
-import org.boliveira.drawing.control.CommandExecutionFailedException;
-import org.boliveira.drawing.control.CommandNotFoundException;
-import org.boliveira.drawing.control.Orchestrable;
 import org.boliveira.drawing.domain.Canvas;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

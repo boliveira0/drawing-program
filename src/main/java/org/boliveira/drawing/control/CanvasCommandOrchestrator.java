@@ -14,9 +14,7 @@ import java.lang.reflect.Method;
 @Log4j
 public class CanvasCommandOrchestrator implements Orchestrable<Canvas> {
 
-    private static final String COMMAND_NOT_FOUND_MSG = "An error occurred whilst executing command %1$s for line %2$s";
-
-    private Commandable canvasDrawer;
+    private final Commandable canvasDrawer;
 
     public CanvasCommandOrchestrator() {
         this.canvasDrawer = new CanvasDrawer();
@@ -31,7 +29,6 @@ public class CanvasCommandOrchestrator implements Orchestrable<Canvas> {
     @Override
     public Canvas execute(String commandLine) {
         var values = commandLine.split(" ");
-        var command = values[0];
         try {
             return this.invokeByCommand(values);
         } catch (CommandNotFoundException e) {

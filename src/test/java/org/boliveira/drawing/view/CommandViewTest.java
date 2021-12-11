@@ -15,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CommandViewTest implements ArgumentsProvider {
 
-    private Navigable parent = Mockito.mock(Navigable.class);
-    private CommandView commandView = new CommandView(new CanvasCommandOrchestrator(), parent);
+    private final Navigable parent = Mockito.mock(Navigable.class);
+    private final CommandView commandView = new CommandView(new CanvasCommandOrchestrator(), parent);
 
 
     @ParameterizedTest
@@ -38,20 +38,40 @@ class CommandViewTest implements ArgumentsProvider {
     }
 
     private String blankCanvas() {
-        return "Not yet implemented";
+        return "----------------------" + System.lineSeparator() +
+                "|                    |" + System.lineSeparator() +
+                "|                    |" + System.lineSeparator() +
+                "|                    |" + System.lineSeparator() +
+                "|                    |" + System.lineSeparator() +
+                "----------------------";
     }
 
     private String horizontalLineCanvas() {
-        return "Not yet implemented";
+        return "----------------------" + System.lineSeparator() +
+                "|                    |" + System.lineSeparator() +
+                "|xxxxxx              |" + System.lineSeparator() +
+                "|                    |" + System.lineSeparator() +
+                "|                    |" + System.lineSeparator() +
+                "----------------------";
     }
 
 
     private String vertialLineCanvas() {
-        return "Not yet implemented";
+        return "----------------------" + System.lineSeparator() +
+                "|                    |" + System.lineSeparator() +
+                "|xxxxxx              |" + System.lineSeparator() +
+                "|     x              |" + System.lineSeparator() +
+                "|     x              |" + System.lineSeparator() +
+                "----------------------";
     }
 
     private String rectangleCanvas() {
-        return "Not yet implemented";
+        return "----------------------" + System.lineSeparator() +
+                "|             xxxxx  |" + System.lineSeparator() +
+                "|xxxxxx       x   x  |" + System.lineSeparator() +
+                "|     x       xxxxx  |" + System.lineSeparator() +
+                "|     x              |" + System.lineSeparator() +
+                "----------------------";
     }
 
     private String bucketFillCanvas() {

@@ -19,4 +19,11 @@ class CreateCanvasViewTest {
         doNothing().when(parent).back();
 
     }
+
+    @Test
+    void whenValidCommandPassed_ExpectResult() {
+        this.createCanvasView.handleInput("20 4");
+        verify(this.parent, times(1)).back();
+    }
+
 }

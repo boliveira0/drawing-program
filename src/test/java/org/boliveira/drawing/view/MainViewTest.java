@@ -6,7 +6,7 @@ import org.mockito.Mockito;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
@@ -16,8 +16,8 @@ class MainViewTest {
 
     @BeforeEach
     public void setup() {
-        when(view.handleInput(anyString())).thenCallRealMethod();
-        doNothing().when(view).quit();
+        when(this.view.handleInput(anyString())).thenCallRealMethod();
+        doNothing().when(this.view).quit();
     }
 
     @Test
@@ -32,8 +32,8 @@ class MainViewTest {
 
     @Test
     void whenInputIs3_ExpectQuitIsCalled() {
-        view.handleInput("3");
-        verify(view, times(1)).quit();
+        this.view.handleInput("3");
+        verify(this.view, times(1)).quit();
     }
 
     @Test

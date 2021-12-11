@@ -30,16 +30,16 @@ class CommandView extends Navigable {
             return Optional.empty();
         } else {
             try {
-                return Optional.of(this.executeAndPrint(input));
+                return Optional.of(this.executeCommandForResult(input));
             } catch (Exception e) {
                 return Optional.of(e.getMessage());
             }
         }
     }
 
-    public String executeAndPrint(String commandLine) {
+    private String executeCommandForResult(String commandLine) {
         var canvas = this.canvasCommandOrchestrator.execute(commandLine);
-        return CanvasViewUtils.printCanvas(canvas);
+        return CanvasViewUtils.frameCanvas(canvas);
     }
 
 }

@@ -8,12 +8,12 @@ import org.boliveira.drawing.domain.Canvas;
 import java.util.Optional;
 
 /**
- * Menu #1
+ * Menu #1 Create a new canvas menu
  */
 @Log4j
 class CreateCanvasView extends Navigable {
 
-    private Orchestrable<Canvas> canvasCommandOrchestrator;
+    private final Orchestrable<Canvas> canvasCommandOrchestrator;
 
     CreateCanvasView(Orchestrable<Canvas> canvasCommandOrchestrator,
                      @NonNull Navigable parentView) {
@@ -31,7 +31,7 @@ class CreateCanvasView extends Navigable {
         try {
             super.back();
             Canvas canvas = this.canvasCommandOrchestrator.execute(String.format("C %s", input));
-            return Optional.of(CanvasViewUtils.printCanvas(canvas));
+            return Optional.of(CanvasViewUtils.frameCanvas(canvas));
         } catch (Exception e) {
             return Optional.of(e.getMessage());
         }
