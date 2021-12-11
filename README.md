@@ -1,10 +1,14 @@
 # Drawing Program
-1. Description
-   This app implements following features (navigation through index)
-    1- Create a new canvas
-        It creates a new canvas
+This program creates, adds vertical and horizontal lines, rectangles and buckfill a canvas.
+
+It has a simple console UI and the navigation depends on user command inputs to System.in.
+
+Main menu in a nutshell:
+
+    1-Create a new canvas.
+        Creates a new canvas
     2- Start drawing on the canvas by issuing various commands
-        It allows the user to perform the following operations:
+        Allows the user to perform the following operations:
            Command              Description
            C w h                Should create a new canvas of width w and height h.
            L x1 y1 x2 y2        Should create a new line from (x1,y1) to (x2,y2). Currently only horizontal or vertical lines are supported. Horizontal and vertical lines will be drawn using the 'x' character.
@@ -15,9 +19,14 @@
     3- Quit
         Quits the program
    
-2. Build
-In order to package the app with dependencies, build the app using the following command:
+Build
+
+In order to package the program with all its dependencies, build the app using the following maven command:
 mvn package
 
-3. Run 
-java -jar target/drawing-local-jar-with-dependencies.jar
+Run
+
+Once the artifact <i>drawing-local-jar-with-dependencies.jar</i> is generated, open a bash window and run using the following command:
+
+
+java -jar drawing-local-jar-with-dependencies.jar
