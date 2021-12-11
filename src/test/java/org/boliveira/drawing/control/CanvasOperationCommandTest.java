@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class CanvasDrawerTest {
+class CanvasOperationCommandTest {
 
-    private CanvasDrawer drawer = new CanvasDrawer();
+    private CanvasOperationCommand drawer = new CanvasOperationCommand();
 
     @BeforeEach
     public void setup() {
-        this.drawer = new CanvasDrawer();
+        this.drawer = new CanvasOperationCommand();
     }
 
     @Test

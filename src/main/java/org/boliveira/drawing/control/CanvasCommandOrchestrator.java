@@ -14,10 +14,10 @@ import java.lang.reflect.Method;
 @Log4j
 public class CanvasCommandOrchestrator implements Orchestrable<Canvas> {
 
-    private final Commandable canvasDrawer;
+    private final CanvasOperationCommand canvasDrawer;
 
     public CanvasCommandOrchestrator() {
-        this.canvasDrawer = new CanvasDrawer();
+        this.canvasDrawer = new CanvasOperationCommand();
     }
 
     /**
