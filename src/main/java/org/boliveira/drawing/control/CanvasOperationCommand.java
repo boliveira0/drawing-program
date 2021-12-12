@@ -65,8 +65,7 @@ class CanvasOperationCommand implements Commandable<Canvas> {
     }
 
     /**
-     * Visit all notes that were not yet visited in all directions, including diagonals.
-     * If a boundary exists or if that node was already visited, the fill won't enqueued.
+     * Visits all nodes that were not yet visited to north, south, east and west of the canvas' matrix.
      *
      * @param x coordinate x from canvas
      * @param y coordinate y from canvas
@@ -83,17 +82,14 @@ class CanvasOperationCommand implements Commandable<Canvas> {
         nodesQueue.add(new Node(y - 1, x - 1));
         while (!nodesQueue.isEmpty()) {
             Node node = nodesQueue.poll();
+            //If a boundary exists or the node was already visited, it won't get enqueued.
             if (!isBoundary(matrix, node) && !isVisited(visitMatrix, node)) {
                 matrix[node.y][node.x] = c;
                 this.markVisited(visitMatrix, node);
                 nodesQueue.add(new Node(node.y - 1, node.x));
-                nodesQueue.add(new Node(node.y - 1, node.x + 1));
                 nodesQueue.add(new Node(node.y, node.x + 1));
-                nodesQueue.add(new Node(node.y + 1, node.x + 1));
                 nodesQueue.add(new Node(node.y + 1, node.x));
-                nodesQueue.add(new Node(node.y + 1, node.x - 1));
                 nodesQueue.add(new Node(node.y, node.x - 1));
-                nodesQueue.add(new Node(node.y - 1, node.x - 1));
             }
         }
         return this.canvas;

@@ -131,8 +131,8 @@ class CommandViewTest implements ArgumentsProvider {
         return "----------------------" + System.lineSeparator() +
                 "|oooooooooooooxxxxxoo|" + System.lineSeparator() +
                 "|xxxxxxooooooox   xoo|" + System.lineSeparator() +
-                "|ooooooxooooooxxxxxoo|" + System.lineSeparator() +
-                "|ooooooxooooooooooooo|" + System.lineSeparator() +
+                "|      xooooooxxxxxoo|" + System.lineSeparator() +
+                "|      xooooooooooooo|" + System.lineSeparator() +
                 "----------------------";
     }
 }
