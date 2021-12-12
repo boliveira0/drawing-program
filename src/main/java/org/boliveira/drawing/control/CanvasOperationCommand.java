@@ -87,13 +87,9 @@ class CanvasOperationCommand implements Commandable<Canvas> {
                 matrix[node.y][node.x] = c;
                 this.markVisited(visitMatrix, node);
                 nodesQueue.add(new Node(node.y - 1, node.x));
-                nodesQueue.add(new Node(node.y - 1, node.x + 1));
                 nodesQueue.add(new Node(node.y, node.x + 1));
-                nodesQueue.add(new Node(node.y + 1, node.x + 1));
                 nodesQueue.add(new Node(node.y + 1, node.x));
-                nodesQueue.add(new Node(node.y + 1, node.x - 1));
                 nodesQueue.add(new Node(node.y, node.x - 1));
-                nodesQueue.add(new Node(node.y - 1, node.x - 1));
             }
         }
         return this.canvas;
