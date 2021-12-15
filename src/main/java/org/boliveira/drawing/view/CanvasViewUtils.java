@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 /**
  * Utilities class for printing a canvas with a frame
  */
-public class CanvasViewUtils {
+class CanvasViewUtils {
 
     private static final String W_FRAME_CHAR = "-";
     private static final String H_FRAME_CHAR = "|";
@@ -18,7 +18,7 @@ public class CanvasViewUtils {
     }
 
     private static String frame(int w, Character[][] matrix) {
-        StringBuilder framedCanvas = new StringBuilder();
+        var framedCanvas = new StringBuilder();
         fillCanvas(framedCanvas, w + 2);
         fillCanvasBody(framedCanvas, matrix);
         fillCanvas(framedCanvas, w + 2);

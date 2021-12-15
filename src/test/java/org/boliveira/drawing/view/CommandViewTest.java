@@ -135,4 +135,12 @@ class CommandViewTest implements ArgumentsProvider {
                 "|      xooooooooooooo|" + System.lineSeparator() +
                 "----------------------";
     }
+    private String bucketFillCanvas5() {
+        return "----------------------" + System.lineSeparator() +
+                "|oooooooooooooxxxxxoo|" + System.lineSeparator() +
+                "|xxxxxxooooooox   xoo|" + System.lineSeparator() +
+                "|      xooooooxxxxxoo|" + System.lineSeparator() +
+                "|      xooooooooooooo|" + System.lineSeparator() +
+                "----------------------";
+    }
 }

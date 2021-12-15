@@ -5,7 +5,7 @@ import lombok.extern.log4j.Log4j;
 import org.boliveira.drawing.domain.Canvas;
 
 import java.util.ArrayDeque;
-import java.util.Queue;
+import java.util.Arrays;
 
 /**
  * Holds an instance of {@link Canvas} and performs operations towards it
@@ -19,11 +19,11 @@ class CanvasOperationCommand implements Commandable<Canvas> {
     @Override
     public Canvas create(Integer w, Integer h) {
         this.canvas = Canvas.builder().width(w).height(h).matrix(new Character[h][w]).build();
-        return this.canvas;
+        return this.buildCanvas();
     }
 
     @Override
-    public Canvas line(Integer x1, Integer y1, Integer x2, Integer y2) throws CanvasNotInitializedException {
+    public Canvas line(Integer x1, Integer y1, Integer x2, Integer y2) {
         this.checkCanvasIsInitialized();
         if (y1.equals(y2)) {
             this.fillLine(y1 - 1, x1 - 1, x2 - 1, true);
@@ -32,7 +32,7 @@ class CanvasOperationCommand implements Commandable<Canvas> {
         } else {
             throw new IllegalArgumentException("Only vertical or horizontal lines are supported!");
         }
-        return this.canvas;
+        return this.buildCanvas();
     }
 
     /**
@@ -46,10 +46,9 @@ class CanvasOperationCommand implements Commandable<Canvas> {
      * @param x2 bottom-right corner x value
      * @param y2 bottom-right corner y value
      * @return the canvas held by the application
-     * @throws CanvasNotInitializedException if canvas is not initialized
      */
     @Override
-    public Canvas rectangle(Integer x1, Integer y1, Integer x2, Integer y2) throws CanvasNotInitializedException {
+    public Canvas rectangle(Integer x1, Integer y1, Integer x2, Integer y2) {
         this.checkCanvasIsInitialized();
         // supports only if coordinates represent upper-left and lower-right
         if (x1 < x2 && y1 < y2) {
@@ -57,7 +56,7 @@ class CanvasOperationCommand implements Commandable<Canvas> {
             this.fillLine(x1 - 1, y1 - 1, y2 - 2, false);
             this.fillLine(y2 - 1, x1 - 1, x2 - 1, true);
             this.fillLine(x2 - 1, y1 - 1, y2 - 2, false);
-            return this.canvas;
+            return this.buildCanvas();
         } else {
             throw new IllegalArgumentException("Invalid boundaries for rectangle");
         }
@@ -71,14 +70,13 @@ class CanvasOperationCommand implements Commandable<Canvas> {
      * @param y coordinate y from canvas
      * @param c colour
      * @return the canvas held by the application
-     * @throws CanvasNotInitializedException if canvas is not initialized
      */
     @Override
-    public Canvas bucketFill(Integer x, Integer y, Character c) throws CanvasNotInitializedException {
+    public Canvas bucketFill(Integer x, Integer y, Character c) {
         this.checkCanvasIsInitialized();
         var matrix = canvas.getMatrix();
         var visitMatrix = new int[canvas.getHeight()][canvas.getWidth()];
-        Queue<Node> nodesQueue = new ArrayDeque();
+        var nodesQueue = new ArrayDeque<Node>();
         nodesQueue.add(new Node(y - 1, x - 1));
         while (!nodesQueue.isEmpty()) {
             Node node = nodesQueue.poll();
@@ -92,7 +90,7 @@ class CanvasOperationCommand implements Commandable<Canvas> {
                 nodesQueue.add(new Node(node.y, node.x - 1));
             }
         }
-        return this.canvas;
+        return this.buildCanvas();
     }
 
     private boolean isBoundary(Character[][] matrix, Node node) {
@@ -109,8 +107,10 @@ class CanvasOperationCommand implements Commandable<Canvas> {
         return visitMatrix[node.y][node.x] == 1;
     }
 
-
-    private void checkCanvasIsInitialized() throws CanvasNotInitializedException {
+    /**
+     * Checks the canvas and throws {@link CanvasNotInitializedException} if a canvas is not initialized.
+     */
+    private void checkCanvasIsInitialized() {
         if (this.canvas == null) {
             throw new CanvasNotInitializedException("Canvas not initialized for the session!");
         }
@@ -128,9 +128,21 @@ class CanvasOperationCommand implements Commandable<Canvas> {
         }
     }
 
+    private Canvas buildCanvas() {
+        return Canvas.builder().width(this.canvas.getWidth())
+                .height(this.canvas.getHeight())
+                .matrix(this.copyMatrix(this.canvas.getMatrix())).build();
+    }
+
+    private Character[][] copyMatrix(Character[][] matrix) {
+        return Arrays.stream(matrix)
+                .map(Character[]::clone)
+                .toArray(size -> matrix.clone());
+    }
+
     @AllArgsConstructor
-    class Node {
-        public int y;
-        public int x;
+    static class Node {
+        int y;
+        int x;
     }
 }

@@ -51,11 +51,11 @@ public class CanvasCommandOrchestrator implements Orchestrable<Canvas> {
         var command = args[0];
         var parameters = new Object[args.length - 1];
         var commandMethod = Commandable.class.getDeclaredMethods();
-        for (Method method : commandMethod) {
+        for (var method : commandMethod) {
             if (method.isAnnotationPresent(Commandable.Command.class)) {
-                Commandable.Command commandAnnotation = method.getDeclaredAnnotation(Commandable.Command.class);
+                var commandAnnotation = method.getDeclaredAnnotation(Commandable.Command.class);
                 if (commandAnnotation.value().equals(command)) {
-                    Class[] parameterTypes = method.getParameterTypes();
+                    var parameterTypes = method.getParameterTypes();
                     for (int i = 0; i < parameterTypes.length; i++) {
                         parameters[i] = ConvertUtils.convert(args[i + 1], parameterTypes[i]);
                     }

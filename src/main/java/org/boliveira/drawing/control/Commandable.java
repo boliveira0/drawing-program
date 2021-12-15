@@ -13,14 +13,13 @@ public interface Commandable<T extends Drawable> {
     T create(Integer w, Integer h);
 
     @Command("L")
-    T line(Integer x1, Integer y1, Integer x2, Integer y2) throws CanvasNotInitializedException;
+    T line(Integer x1, Integer y1, Integer x2, Integer y2);
 
     @Command("R")
-    T rectangle(Integer x1, Integer y1, Integer x2, Integer y2) throws CanvasNotInitializedException;
+    T rectangle(Integer x1, Integer y1, Integer x2, Integer y2);
 
     @Command("B")
-    T bucketFill(Integer x, Integer y, Character c) throws CanvasNotInitializedException;
-
+    T bucketFill(Integer x, Integer y, Character c);
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)

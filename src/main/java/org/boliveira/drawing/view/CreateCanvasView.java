@@ -30,7 +30,7 @@ class CreateCanvasView extends Navigable {
     public Optional<String> handleInput(String input) {
         try {
             super.back();
-            Canvas canvas = this.canvasCommandOrchestrator.execute(String.format("C %s", input));
+            var canvas = this.canvasCommandOrchestrator.execute(String.format("C %s", input));
             return Optional.of(CanvasViewUtils.frameCanvas(canvas));
         } catch (Exception e) {
             return Optional.of(e.getMessage());

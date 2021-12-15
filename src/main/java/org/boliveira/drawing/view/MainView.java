@@ -19,9 +19,10 @@ import java.util.Optional;
 public class MainView extends Navigable {
 
     private static MainView INSTANCE;
+    private final Orchestrable<Canvas> canvasCommandOrchestrator;
+
     private Boolean active;
     private Navigable currentView;
-    private final Orchestrable<Canvas> canvasCommandOrchestrator;
     private Map<String, Navigable> viewsMap;
 
     private MainView() {
@@ -48,7 +49,7 @@ public class MainView extends Navigable {
     public void startMainMenu() {
         try (var reader = new BufferedReader(new InputStreamReader(System.in))) {
             while (this.active) {
-                System.out.print(currentView.menuAsText());
+                System.out.print(this.currentView.menuAsText());
                 var input = reader.readLine();
                 var output = this.currentView.handleInput(input.trim());
                 if (!output.isEmpty()) {
